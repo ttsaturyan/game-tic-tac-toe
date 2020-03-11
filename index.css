@@ -1,0 +1,17 @@
+table {
+  background: cornsilk;
+  margin: 0 auto;
+  margin-top: 25px;
+  padding: 1px;
+}
+
+td {
+  font-size: 32px;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+}
+
+html {
+  background: chartreuse;
+}
