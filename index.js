@@ -1,7 +1,8 @@
 let td = document.getElementsByTagName("td");
 let x = true;
-let xxx = document.getElementById("X");
+let XnextO = document.getElementById("XnextO");
 let next;
+let j = 1;
 const array = [
   [0, 1, 2],
   [3, 4, 5],
@@ -12,10 +13,9 @@ const array = [
   [0, 4, 8],
   [2, 4, 6]
 ];
-window.onload = function() {
-  document.getElementById("result_X").innerHTML = sessionStorage.getItem("X");
-  document.getElementById("result_O").innerHTML = sessionStorage.getItem("O");
-};
+Storage();
+document.getElementById("result_X").innerText = sessionStorage.getItem("X");
+document.getElementById("result_O").innerText = sessionStorage.getItem("O");
 document.write("<table border=1>");
 for (let i = 0; i < 3; i++) {
   document.write("<tr>");
@@ -32,6 +32,9 @@ for (let index = 0; index < td.length; index++) {
     "click",
     function myFunction() {
       next = x ? "X" : "O";
+      XnextO.innerText = `now play is ${x ? "o" : "x"}`;
+      x = !x;
+
       element.innerHTML = next;
       for (let i = 0; i < array.length; i++) {
         for (let e = 0; e < array[i].length; e++) {
@@ -44,15 +47,30 @@ for (let index = 0; index < td.length; index++) {
             array[i][2] === next
           ) {
             win(next);
-
-            // document.location.reload(true);
+            alert(`wins the  ${next}`);
+            document.location.reload(true);
           }
         }
       }
-      x = !x;
+      if (j === 9) {
+        alert("the game ended in a draw");
+        document.location.reload(true);
+      }
+      j++;
     },
     { once: true }
   );
+}
+function Storage() {
+  if (sessionStorage.getItem("X") == null) {
+    console.log(111);
+    sessionStorage.setItem("X", 0);
+  }
+  if (sessionStorage.getItem("O") == null) {
+    console.log(111);
+
+    sessionStorage.setItem("O", 0);
+  }
 }
 
 function win(next) {
